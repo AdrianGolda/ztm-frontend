@@ -30,20 +30,24 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from) => {
-    // const {isLoggedIn} = useSessionStore();
-    // console.log('from', from,)
-    // console.log('to', to,)
-    // console.log('isLoggedIn', isLoggedIn)
-  // if (
-  //   // make sure the user is authenticated
-  //   !isLoggedIn
-  //     // &&
-  //   // ❗️ Avoid an infinite redirect
-  //   // to.name != 'Login'
-  // ) {
-  //   // redirect the user to the login page
-  //   return { name: 'Login' }
-  // }
+    const {isLoggedIn} = useSessionStore();
+    console.log('before logged in', isLoggedIn)
+  //   // console.log('from', from,)
+  //   // console.log('to', to,)
+  //   // console.log('isLoggedIn', isLoggedIn)
+  if (
+    // make sure the user is authenticated
+    !isLoggedIn
+      &&
+    // ❗️ Avoid an infinite redirect
+    to.name != 'Login'
+  ) {
+      console.log('to', to)
+      console.log('redirect')
+    // redirect the user to the login page
+    //   router.push({name: "Login"})
+    return { name: 'Login' }
+  }
 })
 
 export default router
