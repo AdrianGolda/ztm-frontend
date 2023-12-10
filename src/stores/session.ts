@@ -1,9 +1,10 @@
 import {defineStore} from 'pinia'
 import {API, TOKEN_KEY} from "../api/fetcherService";
+import {ref} from "vue";
 
 export const useSessionStore = defineStore('session', () => {
 
-    const isLoggedIn = !!localStorage.getItem(TOKEN_KEY)
+    const isLoggedIn = ref(!!localStorage.getItem(TOKEN_KEY))
 
     const login = async ({email, password}: { email: string, password: string }): Promise<boolean> => {
         console.log("login")
@@ -19,6 +20,7 @@ export const useSessionStore = defineStore('session', () => {
                     const body = await response.json();
                     console.log('body', body)
                     localStorage.setItem(TOKEN_KEY, body.token);
+                    isLoggedIn.value = true
                     return true
                 }
                 return false;
