@@ -9,13 +9,13 @@ const props = defineProps<{
   stops: SingleUserStopResponse[]
 }>()
 
-const parsedStops: SingleStopType[] = props.stops.map(stop => ({
+const parsedStops = props.stops.map(stop => ({
   title: stop.stopName,
   rows: stop.delay.map(singleDelay => ({
-    id: '1',
-    routeId: "2",
-    theoreticalTime: "3",
-    delayInSeconds: 4
+    id: singleDelay.id,
+    routeId: singleDelay.routeId,
+    estimatedTime: singleDelay.estimatedTime,
+    delayInSeconds: singleDelay.delayInSeconds,
   }))
 }))
 onMounted(() => {

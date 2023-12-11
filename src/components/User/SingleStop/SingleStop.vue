@@ -14,7 +14,7 @@ const columns = [
   },
   {
     label: 'Czas przyjazdu',
-    field: 'theoreticalTime',
+    field: 'estimatedTime',
     type: 'time',
   },
   {

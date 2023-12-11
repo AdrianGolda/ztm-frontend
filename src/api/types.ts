@@ -1,7 +1,7 @@
 export type DelayRow = {
     id: string;
-    routeId: string;
-    theoreticalTime: string;
+    routeId: number;
+    estimatedTime: string;
     delayInSeconds: number;
 }
 
