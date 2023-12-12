@@ -3,6 +3,7 @@
 import {VueGoodTable} from 'vue-good-table-next';
 import type {SingleStop, SingleUserStopResponse} from "../../../api/types";
 import {onMounted} from "vue";
+import {addStop} from "@/api/fetcherService";
 
 // add to component
 
@@ -21,9 +22,9 @@ onMounted(() => {
 </script>
 <template>
   <h1>All stops</h1>
-  <div v-for="stop in allStops" v-bind:key="stop.stopName">
+  <div class="flex" v-for="stop in allStops" v-bind:key="stop.stopName">
     <div>{{ stop.stopName }}</div>
-<!--    <button @click="addStop"></button>-->
+    <button @click="addStop(stop.stopId)">add</button>
   </div>
 </template>
 

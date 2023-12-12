@@ -11,6 +11,7 @@ const props = defineProps<{
 
 const parsedStops = props.stops.map(stop => ({
   title: stop.stopName,
+  id: stop.stopId,
   rows: stop.delay.map(singleDelay => ({
     id: singleDelay.id,
     routeId: singleDelay.routeId,
@@ -27,7 +28,7 @@ onMounted(() => {
 <template>
   <h1>My Stops</h1>
   <div v-for="stop in parsedStops"  v-bind:key="stop.title">
-    <single-stop :title="stop.title" :rows="stop.rows"/>
+    <single-stop :title="stop.title" :id="stop.id" :rows="stop.rows"/>
   </div>
 </template>
 

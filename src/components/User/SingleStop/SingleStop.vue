@@ -2,6 +2,7 @@
 // @ts-ignore
 import {VueGoodTable} from 'vue-good-table-next';
 import type { SingleStopType} from "../../../api/types";
+import {removeStop} from "@/api/fetcherService";
 
 defineProps<SingleStopType>()
 
@@ -27,6 +28,7 @@ const columns = [
 <template>
   <div>
     <h1>{{title}}</h1>
+    <button @click="removeStop(id)">Remove stop</button>
     <vue-good-table
         :columns="columns"
         :rows="rows"/>

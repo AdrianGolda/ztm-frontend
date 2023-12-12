@@ -10,6 +10,7 @@ const req = (
 ) => fetch(`${API}/${api}`, {
     method: method,
     headers: {
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
         'authorization': `bearer ${localStorage.getItem(TOKEN_KEY)}`
     },
@@ -25,6 +26,20 @@ export const fetchUserStops = async (): Promise<SingleUserStopResponse[]> => {
 
 export const fetchAllStops = async (): Promise<SingleStop[]> => {
     return await req('GET',`stops`).then(async response => {
+        return await response.json();
+    })
+}
+
+export const removeStop = async (id: number): Promise<{ msg: string }> => {
+    const payload = JSON.stringify({id: id.toString()})
+    return await req('POST',`remove`, payload).then(async response => {
+        return await response.json();
+    })
+}
+
+export const addStop = async (id: number): Promise<{ msg: string }> => {
+    const payload = JSON.stringify({id: id.toString()})
+    return await req('POST',`add`, payload).then(async response => {
         return await response.json();
     })
 }

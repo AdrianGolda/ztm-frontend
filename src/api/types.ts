@@ -28,6 +28,7 @@ export type SingleUserStopResponse = SingleStop & {
 
 export type SingleStopType = {
     title: string;
+    id: number;
     rows: DelayRow[];
 }
 
