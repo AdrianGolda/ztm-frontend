@@ -19,12 +19,13 @@ const parsedStops = props.stops.map(stop => ({
   }))
 }))
 onMounted(() => {
-  console.log('props', props)
+  // console.log('props', props)
 })
 
 
 </script>
 <template>
+  <h1>My Stops</h1>
   <div v-for="stop in parsedStops"  v-bind:key="stop.title">
     <single-stop :title="stop.title" :rows="stop.rows"/>
   </div>

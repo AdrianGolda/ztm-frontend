@@ -1,37 +1,38 @@
 <script setup lang="ts">
 import MyStops from "../components/User/MyStops/MyStops.vue";
-import {API, TOKEN_KEY} from "../api/fetcherService";
+import AllStops from "../components/User/AllStops/AllStops.vue";
+import {API, fetchAllStops, fetchUserStops, TOKEN_KEY} from "../api/fetcherService";
 import type {SingleUserStopResponse} from "../api/types";
 
 
-import { useQuery } from "vue-query";
+import {useQuery} from "vue-query";
 
-const fetchUserStops = async (): Promise<SingleUserStopResponse[]> => {
-  return await fetch(`${API}/user-stops`, {
-    method: 'GET',
-    headers: {
-        'Accept': 'application/json',
-      'authorization': `bearer ${localStorage.getItem(TOKEN_KEY)}`
 
-    }
-  }).then(async response => {
-    return await response.json();
-  })
-}
-const { isLoading, data: stops } = useQuery(
-  ["stops"],
-  fetchUserStops
+const { isLoading: isMyStopsLoading, data: myStops } = useQuery(
+    ["stops"],
+    fetchUserStops
 );
+
+
+const { isLoading: isAllStopsLoading, data: allStops } = useQuery(
+    ["allStops"],
+    fetchAllStops
+)
 
 
 </script>
 
 <template>
-  <div>
     <Suspense>
-        <MyStops :stops="stops" v-if="!isLoading"/>
-      </Suspense>
-  </div>
+      <div :style="{ display: 'flex', justifyContent: 'space-between', width: '100%' }">
+         <div :style="{ width: '100%'}">
+          <AllStops :allStops="allStops" v-if="!isAllStopsLoading"/>
+        </div>
+        <div :style="{ width: '100%'}">
+          <MyStops :stops="myStops" v-if="!isMyStopsLoading"/>
+        </div>
+      </div>
+    </Suspense>
 </template>
 
 <style>

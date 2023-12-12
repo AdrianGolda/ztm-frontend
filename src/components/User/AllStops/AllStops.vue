@@ -1,13 +1,32 @@
-<script lang="ts">
+<script setup lang="ts">
 // @ts-ignore
-import { VueGoodTable } from 'vue-good-table-next';
+import {VueGoodTable} from 'vue-good-table-next';
+import type {SingleStop, SingleUserStopResponse} from "../../../api/types";
+import {onMounted} from "vue";
 
 // add to component
 
+const props = defineProps<{
+  allStops: SingleStop[]
+}>()
+
+const allStops = props.allStops
+onMounted(() => {
+  console.log('props', props)
+})
+
+
+
+
 </script>
 <template>
-<div></div>
+  <h1>All stops</h1>
+  <div v-for="stop in allStops" v-bind:key="stop.stopName">
+    <div>{{ stop.stopName }}</div>
+<!--    <button @click="addStop"></button>-->
+  </div>
 </template>
+
 
 <style scoped>
 </style>

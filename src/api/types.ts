@@ -14,12 +14,15 @@ export type DelayResponse = {
     "theoreticalTime": string
 }
 
-export type SingleUserStopResponse = {
+export type SingleStop = {
     "stopId": number
     "stopCode": string
     "stopName": string
     "stopShortName": string;
     "stopDesc": string;
+}
+
+export type SingleUserStopResponse = SingleStop & {
     "delay": DelayResponse[]
 }
 
@@ -27,6 +30,8 @@ export type SingleStopType = {
     title: string;
     rows: DelayRow[];
 }
+
+export type AllStopsResponse = {}
 
 
 
