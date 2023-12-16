@@ -1,10 +1,10 @@
 <script setup lang="ts">
 // @ts-ignore
 import {VueGoodTable} from 'vue-good-table-next';
-import type { SingleStopType} from "../../../api/types";
+import type {SingleStopType} from "../../../api/types";
 import {removeStop} from "@/api/fetcherService";
 
-const props = defineProps<SingleStopType & {refetchUserStops: () => void}>()
+const props = defineProps<SingleStopType & { refetchUserStops: () => void }>()
 
 
 const columns = [
@@ -26,10 +26,11 @@ const columns = [
 ]
 
 
-import { useMutation } from "vue-query";
+import {useMutation} from "vue-query";
+import {ref} from "vue";
 
 function useRemoveStopMutation() {
-  return useMutation(['stops'],(id: number) => removeStop(id), {
+  return useMutation(['stops'], (id: number) => removeStop(id), {
     onSuccess: () => {
       console.log('success remove')
       props.refetchUserStops();
@@ -37,17 +38,18 @@ function useRemoveStopMutation() {
   });
 }
 
-const { mutate } = useRemoveStopMutation();
+const {mutate} = useRemoveStopMutation();
 
 function remove(id: number) {
+  isActive.value = true;
   mutate(id);
 }
 
-
+const isActive = ref(false)
 </script>
 <template>
   <div>
-    <h1>{{title}}</h1>
+    <h1 :class="{ remove: isActive }">{{ title }}</h1>
     <button @click="remove(id)">Remove stop</button>
     <vue-good-table
         :key="title"
@@ -57,4 +59,8 @@ function remove(id: number) {
 </template>
 
 <style scoped>
+
+.remove {
+  color: red
+}
 </style>
