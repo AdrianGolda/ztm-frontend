@@ -9,7 +9,7 @@ export type DelayResponse = {
     "id": string
     "delayInSeconds": number
     "estimatedTime": string
-    "headsign": "Oliwa",
+    "headsign": string
     "routeId": number
     "theoreticalTime": string
 }

@@ -4,7 +4,7 @@ import {VueGoodTable} from 'vue-good-table-next';
 import type { SingleStopType} from "../../../api/types";
 import {removeStop} from "@/api/fetcherService";
 
-defineProps<SingleStopType>()
+const props = defineProps<SingleStopType & {refetchUserStops: () => void}>()
 
 
 const columns = [
@@ -24,12 +24,33 @@ const columns = [
     type: 'number',
   }
 ]
+
+
+import { useMutation } from "vue-query";
+
+function useRemoveStopMutation() {
+  return useMutation(['stops'],(id: number) => removeStop(id), {
+    onSuccess: () => {
+      console.log('success remove')
+      props.refetchUserStops();
+    }
+  });
+}
+
+const { mutate } = useRemoveStopMutation();
+
+function remove(id: number) {
+  mutate(id);
+}
+
+
 </script>
 <template>
   <div>
     <h1>{{title}}</h1>
-    <button @click="removeStop(id)">Remove stop</button>
+    <button @click="remove(id)">Remove stop</button>
     <vue-good-table
+        :key="title"
         :columns="columns"
         :rows="rows"/>
   </div>

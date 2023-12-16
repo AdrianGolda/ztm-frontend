@@ -7,7 +7,6 @@ export const useSessionStore = defineStore('session', () => {
     const isLoggedIn = ref(!!localStorage.getItem(TOKEN_KEY))
 
     const login = async ({email, password}: { email: string, password: string }): Promise<boolean> => {
-        console.log("login")
         return await fetch(`${API}/login`, {
             method: 'POST', headers: {
                 'Accept': 'application/json',
