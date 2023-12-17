@@ -42,9 +42,9 @@ const doRegister = () => {
           <div v-if="!registerActive" class="card login" v-bind:class="{ error: emptyFields }">
             <h1>Sign In</h1>
             <div class="form-group">
-              <input v-model="login" type="text" class="form-control" placeholder="Email" required>
-              <input v-model="password" type="password" class="form-control" placeholder="Password" required>
-              <input type="submit" class="btn btn-primary" @click="doLogin">
+              <input id="login" v-model="login" type="text" class="form-control" placeholder="Email" required>
+              <input id="password" v-model="password" type="password" class="form-control" placeholder="Password" required>
+              <input id="submit" type="submit" class="btn btn-primary" @click="doLogin">
               <p>Don't have an account? <a href="#" @click="registerActive = !registerActive, emptyFields = false">Sign
                 up here</a>
               </p>

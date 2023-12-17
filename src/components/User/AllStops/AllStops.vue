@@ -41,7 +41,7 @@ function add(id: number) {
 </script>
 <template>
   <h1>{{ $translate('allStops') }}</h1>
-  <div class="flex" v-for="stop in allStops" v-bind:key="stop.stopName">
+  <div id="stop-container" class="flex" v-for="stop in allStops" v-bind:key="stop.stopName">
     <div>{{ stop.stopName }}</div>
     <button @click="add(stop.stopId)">add</button>
   </div>

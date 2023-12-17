@@ -44,7 +44,7 @@ onMounted(() => {
 </script>
 <template>
   <h1>My Stops</h1>
-  <div v-for="stop in parsedStops"  v-bind:key="stop.title">
+  <div id="my-stops" v-for="stop in parsedStops"  v-bind:key="stop.title">
     <single-stop :refetch-user-stops="props.refetchUserStops" :title="stop.title" :id="stop.id" :rows="stop.rows"/>
   </div>
 </template>
