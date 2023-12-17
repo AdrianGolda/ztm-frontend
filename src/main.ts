@@ -17,6 +17,11 @@ const app = createApp(App)
 app.use(VueQueryPlugin);
 app.use(VueGoodTablePlugin);
 app.use(createPinia())
+import i18nPlugin from './plugins/i18n'
+
+app.use(i18nPlugin, {
+  allStops: "Wszystkie przystanki"
+})
 app.use(router)
 
 app.mount('#app')
